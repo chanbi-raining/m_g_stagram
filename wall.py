@@ -84,12 +84,12 @@ def getNewsfeed(db,user):
                     end = len(data)-1
                     for order in range((page-1)*5, len(data)):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25),str(data[order]['posting_name'][:10]).ljust(10),
-                              str(data[order]['text'][:40]))
+                              str(data[order]['text'][:140]))
                 else:
                     end = page*5-1
                     for order in range((page-1)*5, page*5):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['posting_name'][:10]).ljust(10),
-                              str(data[order]['text'][:40]))
+                              str(data[order]['text'][:140]))
                         
                         
                 print('\n',page,'/', total_pages)
