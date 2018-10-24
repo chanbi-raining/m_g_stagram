@@ -27,23 +27,24 @@ def getPosts(db,userid, delete = 0):
                     end = len(data)-1
                     for order in range((page-1)*5, len(data)):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['text']).ljust(10))
+                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                 else:
                     end = page*5-1
                     for order in range((page-1)*5, page*5):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['text']).ljust(10))
+                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                         
                 print('\n',page,'/', total_pages)
                 
                 if delete == 0:
                     #1-based indexing
-                    comm = eval(input('\nTo see comments, enter the post number. Enter 0 to go back: '))
+                    comm = eval(input('\nIf you want to see comments, please enter a number: (if you dont want, enter any other number)'))
                     if (page-1)*5 <= comm - 1 <= end:
                         print('\n[comments]\n')
                         print('{:>10} {:>10} {:>10}'.format('name', 'comment', 'date'))
                         comments = data[comm-1]['comments']
                         for i in comments:
-                            print(str(i['id']).ljust(10), str(i['date'])[:-7].ljust(25),str(i['name']).ljust(10),
-                              str(i['comment']).ljust(10))
+                            print(i)
 
                 
                 print('\nTotal page number: ', total_pages)
@@ -67,7 +68,7 @@ def getPosts(db,userid, delete = 0):
 
 def getNewsfeed(db,user):
     try:
-        following_list = db.users.find_one({'id':user},{'_id':0, 'following':1})['following']  #following하고 있는 사람들만 보여주기
+        following_list = db.users.find_one({'id':user, },{'_id':0, 'following':1})['following']  #following하고 있는 사람들만 보여주기
         data = list(db.posts.find({'posting_id':{'$in':following_list}}).sort('date', -1))
         
         if len(data) == 0:
@@ -82,22 +83,25 @@ def getNewsfeed(db,user):
 
             if page <= total_pages:
                 print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content'.ljust(10))
+                #print('{:>10} {:>10} {:>10}'.format('num','Date', 'Content'))
                 if page == total_pages:
                     end = len(data)-1
                     for order in range((page-1)*5, len(data)):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25),str(data[order]['posting_name']).ljust(10),
                               str(data[order]['text']).ljust(10))
+                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                 else:
                     end = page*5-1
                     for order in range((page-1)*5, page*5):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['posting_name']).ljust(10),
                               str(data[order]['text']).ljust(10))
+                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                         
                 print('\n',page,'/', total_pages)
                 
 
                 #1-based indexing
-                comm = eval(input('\nTo see comments, enter the post number. Enter 0 to go back: '))
+                comm = eval(input('\nIf you want to see comments, please enter the post number: (if you dont want, enter any other number)'))
                 if (page-1)*5 <= comm - 1 <= end:
                     print('\n[comments]\n')
                     print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content'.ljust(10))
@@ -107,21 +111,21 @@ def getNewsfeed(db,user):
                         print(str(current['id']).ljust(10), str(current['date'])[:-7].ljust(25),str(current['name']).ljust(10),
                               str(current['comment']).ljust(10))
                 
-                print('\nTotal page number: ', total_pages)
-                comment = input('\nSelect Menu \n 1. Commenting on this post \n 2. Delete your comments \n 3. Exit\n ')
-                if comment == '1':
-                    commentFunc(db, user, data[comm-1], 1)
-                    data = list(db.posts.find({'posting_id':{'$in':following_list}}).sort('date', -1))
+
+                    comment = input('\nSelect Menu \n 1. Commenting on this post \n 2. Delete your comments \n 3. Exit\n ')
+                    if comment == '1':
+                        commentFunc(db, user, data[comm-1], 1)
+                        data = list(db.posts.find({'posting_id':{'$in':following_list}}).sort('date', -1))
+
+                    if comment == '2':
+                        commentFunc(db, user, data[comm-1], 2)
+                        data = list(db.posts.find({'posting_id':{'$in':following_list}}).sort('date', -1))
                     
-                if comment == '2':
-                    commentFunc(db, user, data[comm-1], 2)
-                    data = list(db.posts.find({'posting_id':{'$in':following_list}}).sort('date', -1))
                 else:
-                
-                    a = eval(input('\nDo you wish to see another page? [1/0]: '))
-                    if a == 1:
-                        print('\nTotal page number: ', total_pages)
-                        page = eval(input('\nWhat page do you want to see?: '))
+                        a = eval(input('\nDo you wish to see another page? [1/0]: '))
+                        if a == 1:
+                            print('\nTotal page number: ', total_pages)
+                            page = eval(input('\nWhat page do you want to see?: '))
 
             else:
                 print('\nNo page!')
@@ -179,22 +183,25 @@ def Hashtags(db, user):
             if data:    
                 if page <= total_pages:
                     print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content'.ljust(10))
+                    #print('{:>10} {:>10} {:>10}'.format('num','Date', 'Content'))
                     if page == total_pages:
                         end = len(data)-1
                         for order in range((page-1)*5, len(data)):
                             print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25),str(data[order]['posting_name']).ljust(10),
                                   str(data[order]['text']).ljust(10))
+                            #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                     else:
                         end = page*5-1
                         for order in range((page-1)*5, page*5):
                             print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['posting_name']).ljust(10),
                                   str(data[order]['text']).ljust(10))
+                            #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
 
                     print('\n',page,'/', total_pages)
 
 
                     #1-based indexing
-                    comm = eval(input('\nTo see comments, enter the post number. Enter 0 to go back: '))
+                    comm = eval(input('\nIf you want to see comments, please enter the post number: (if you dont want, enter any other number)'))
                     if (page-1)*5 <= comm - 1 <= end:
                         print('\n[comments]\n')
                         print('{:>10} {:>10} {:>10}'.format('name', 'comment', 'date'))
