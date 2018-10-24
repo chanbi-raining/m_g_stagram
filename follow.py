@@ -190,7 +190,8 @@ def unfollowNew(db, userid):
             if idxx == 'q': break
             try:
                 foll_id = following[int(idxx)]
-                areyousure = input('Do you wish to unfollow '+str(foll_id)+'? [1/0] ')
+                message = 'Do you wish to unfollow '+str(foll_id)+'? [1/0] '
+                areyousure = input(message)
                 if areyousure != '1':
                     continue
                 res1 = db.users.update_one({'id': userid}, {'$pull': {'following': foll_id}})
@@ -250,21 +251,21 @@ Please select the options below.
                     if before in ['Y', 'y', 'yes','YES','Yes']:
                         check = db.users.update_one({'id':userid}, {'$push':{'blacklist':blck_id}})
                         my_info = db.users.find_one({'id':userid})
-                        if_following = int(foll_id in my_info['following'])
-                        if_follower = int(foll_id in my_info['follower'])
+                        if_following = int(blck_id in my_info['following'])
+                        if_follower = int(blck_id in my_info['follower'])
 
                         if check.modified_count == 1:
                             if if_following:
-                                res1 = db.users.update_one({'id': userid}, {'$pull': {'following': foll_id}})
-                                res2 = db.users.update_one({'id': foll_id}, {'$pull': {'follower': userid}})
+                                res1 = db.users.update_one({'id': userid}, {'$pull': {'following': blck_id}})
+                                res2 = db.users.update_one({'id': blck_id}, {'$pull': {'follower': userid}})
                                 if if_follwer:
-                                    res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': foll_id}})
-                                    res4 = db.users.update_one({'id': foll_id}, {'$pull': {'following': userid}})
+                                    res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': blck_id}})
+                                    res4 = db.users.update_one({'id': blck_id}, {'$pull': {'following': userid}})
                                     if res1.modified_count + res2.modified_count + res3.modified_count + res4.modified_count == 4:
                                         print('\n*** Successfully added to the blacklist ***')
                                   
                                     else:
-                                        print('\n[ERROR] Failed blacklisting', foll_id, 'Would you like to try again? [1/0] ')
+                                        print('\n[ERROR] Failed blacklisting', blck_id, 'Would you like to try again? [1/0] ')
                                         cont = input()
                                         if cont != '1':
                                             break
@@ -274,20 +275,20 @@ Please select the options below.
                                         print('\n*** Successfully blacklisting ***')
                                   
                                     else:
-                                        print('\n[ERROR] Failed blacklisting', foll_id, 'Would you like to try again? [1/0] ')
+                                        print('\n[ERROR] Failed blacklisting', blck_id, 'Would you like to try again? [1/0] ')
                                         cont = input()
                                         if cont != '1':
                                             break
                                             
                             else:
                                 if if_follwer:
-                                    res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': foll_id}})
-                                    res4 = db.users.update_one({'id': foll_id}, {'$pull': {'following': userid}})
+                                    res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': blck_id}})
+                                    res4 = db.users.update_one({'id': blck_id}, {'$pull': {'following': userid}})
                                     if res1.modified_count + res2.modified_count + res3.modified_count + res4.modified_count == 4:
                                         print('\n*** Successfully added to the blacklist ***')
                                   
                                     else:
-                                        print('\n[ERROR] Failed blacklisting', foll_id, 'Would you like to try again? [1/0] ')
+                                        print('\n[ERROR] Failed blacklisting', blck_id, 'Would you like to try again? [1/0] ')
                                         cont = input()
                                         if cont != '1':
                                             break
@@ -295,7 +296,7 @@ Please select the options below.
                                     print('\n*** Successfully added to the blacklist ***')
 
                         else: 
-                            print('\n[ERROR] Failed blacklisting', foll_id, 'Would you like to try again? [1/0] ')
+                            print('\n[ERROR] Failed blacklisting', blck_id, 'Would you like to try again? [1/0] ')
                             cont = input()
                             if cont != '1':
                                 break
