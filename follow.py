@@ -182,20 +182,19 @@ def unfollowNew(db, userid):
         if menu == '1':
             following = db.users.find_one({'id': userid}, {'following':1, '_id':0})['following']
             #print(following)
+            print()
             print('Num'.ljust(10), 'ID'.ljust(15), 'Name'.ljust(15), 'Profile')        
             for k, i in enumerate(following):
                 person = db.users.find_one({'id': i}, {'_id':0})
                 print(str(k).ljust(10), i.ljust(15), person['name'].ljust(15), person['profile'])
             print()
             message = 'Type the user number that you want to unfollow. Type q to go back to the user page. '
-            print(message)
-            idxx = input()
+            idxx = input(message)
             if idxx == 'q': break
             try:
                 foll_id = following[int(idxx)]
                 message = 'Do you wish to unfollow '+str(foll_id)+'? [1/0] '
-                print(message)
-                areyousure = input()
+                areyousure = input(message)
                 if areyousure != '1':
                     continue
                 res1 = db.users.update_one({'id': userid}, {'$pull': {'following': foll_id}})
