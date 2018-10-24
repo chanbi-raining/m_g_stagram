@@ -149,7 +149,7 @@ def commentFunc(db, user, posting, new = 1):
                 print('\nFailed! Please try again')
                 
         elif new == 2:
-            num = eval(input('\nplease enter the comment number you want to delete\n'))
+            num = eval(input('\nPlease enter the comment number you want to delete\nEnter: '))
             if posting['comments'][num-1]['id'] == user:
                 check = db.posts.update({'_id':posting['_id']}, {'$pull':{'comments': {'$in':[posting['comments'][num-1]]}}})
                 if check['nModified'] == 1:
