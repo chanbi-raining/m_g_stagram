@@ -50,7 +50,7 @@ def searchID(db, userid, follow = 1):
 
         print('\n\nSearch result\n')
         print('ID'.ljust(15), 'Name'.ljust(15), 'Profile')
-        print(foll_id.ljust(15), search['name'].ljust(15), search['profile'])
+        print(foll_id[:15].ljust(15), search['name'][:15].ljust(15), search['profile'])
 
         if follow == 1:
             follow_ok = input('\n\nWould you like to follow this user? [1/0] ')
@@ -103,7 +103,7 @@ def searchName(db, userid, follow = 1):
 
         while page > 0:
             for idx, user in enumerate(search[(page - 1) * 10:page * 10]):
-                print(str(idx).ljust(10), user['id'].ljust(15), user['name'].ljust(15), user['profile'])
+                print(str(idx).ljust(10), user['id'][:15].ljust(15), user['name'][:15].ljust(15), user['profile'])
             print('\n',page,'/', total_pages)
             a = 0
             if total_pages != 1:
