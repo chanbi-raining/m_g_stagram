@@ -99,7 +99,7 @@ def userpage(db, user):
     user page
     '''
     
-    print()
+    print('\n\n:::    User Page   :::\n')
     print('1. My status')
     print('2. Newsfeed')
     print('3. Wall')
