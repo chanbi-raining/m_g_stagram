@@ -80,9 +80,9 @@ def mystatus(db, user):
     print user profile, # followers, and # followings
     '''
     print()
-    print('='*40)
+    print('='*50)
     print('\t\tMy status')
-    print('='*40+'\n\n')
+    print('='*50+'\n\n')
     result = list(db.users.find({'id': user}, {'profile':1, 'following':1, '_id':0, 'follower':1}))[0]
     profile = result['profile']
     following = len(result['following'])
