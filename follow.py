@@ -250,7 +250,7 @@ Please select the options below.
                     break
 
                 else:
-                    message = 'Do you really want to put', blck_id,'on your blacklist? [Y/N] '
+                    message = 'Do you really want to put '+blck_id+' on your blacklist? [Y/N] '
                     before = input(message)
                     if before in ['Y', 'y', 'yes','YES','Yes']:
                         check = db.users.update_one({'id':userid}, {'$push':{'blacklist':blck_id}})
