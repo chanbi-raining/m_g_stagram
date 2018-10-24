@@ -317,7 +317,7 @@ Please select the options below.
                     else:
                         before = input('Do you really want to remove from your blacklist? [Y/N]')
                         if before in ['Y', 'y', 'yes','YES','Yes']:
-                            check = db.users.update_one({'id':userid},{'$pull':{'blacklist': {'$in':[blck_id]}}})
+                            check = db.users.update_one({'id':userid},{'$pull':{'blacklist': black_list[int(idxx)-1]}})
                             if check.modified_count ==1:
                                 print('\n*** Successfully removed ***')
 
