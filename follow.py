@@ -232,7 +232,7 @@ Please select the options below.
 2. Search by name
 3. Back
                       ''')
-                want = int(input(''))
+                want = int(input('Enter :'))
                 if want == 1:
                     blck_id = searchID(db, userid, 0)
                 elif want == 2:
@@ -246,7 +246,7 @@ Please select the options below.
                     break
 
                 else:
-                    before = input('Do you really want to put on your blacklist? [Y/N]')
+                    before = input('Do you really want to put', blck_id,'on your blacklist? [Y/N]')
                     if before in ['Y', 'y', 'yes','YES','Yes']:
                         check = db.users.update_one({'id':userid}, {'$push':{'blacklist':blck_id}})
                         my_info = db.users.find_one({'id':userid})
@@ -261,7 +261,7 @@ Please select the options below.
                                     res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': foll_id}})
                                     res4 = db.users.update_one({'id': foll_id}, {'$pull': {'following': userid}})
                                     if res1.modified_count + res2.modified_count + res3.modified_count + res4.modified_count == 4:
-                                        print('\n*** Successfully blacklisting ***')
+                                        print('\n*** Successfully added to the blacklist ***')
                                   
                                     else:
                                         print('\n[ERROR] Failed blacklisting', foll_id, 'Would you like to try again? [1/0] ')
@@ -284,7 +284,7 @@ Please select the options below.
                                     res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': foll_id}})
                                     res4 = db.users.update_one({'id': foll_id}, {'$pull': {'following': userid}})
                                     if res1.modified_count + res2.modified_count + res3.modified_count + res4.modified_count == 4:
-                                        print('\n*** Successfully blacklisting ***')
+                                        print('\n*** Successfully added to the blacklist ***')
                                   
                                     else:
                                         print('\n[ERROR] Failed blacklisting', foll_id, 'Would you like to try again? [1/0] ')
@@ -292,7 +292,7 @@ Please select the options below.
                                         if cont != '1':
                                             break
                                 else:
-                                    print('\n*** Successfully blacklisting ***')
+                                    print('\n*** Successfully added to the blacklist ***')
 
                         else: 
                             print('\n[ERROR] Failed blacklisting', foll_id, 'Would you like to try again? [1/0] ')
