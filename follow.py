@@ -259,7 +259,7 @@ Please select the options below.
                                 print('a')
                                 res1 = db.users.update_one({'id': userid}, {'$pull': {'following': blck_id}})
                                 res2 = db.users.update_one({'id': blck_id}, {'$pull': {'follower': userid}})
-                                if if_follwer:
+                                if if_follower:
                                     print('b')
                                     res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': blck_id}})
                                     res4 = db.users.update_one({'id': blck_id}, {'$pull': {'following': userid}})
@@ -287,7 +287,7 @@ Please select the options below.
                                 print('d')
                                 res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': blck_id}})
                                 res4 = db.users.update_one({'id': blck_id}, {'$pull': {'following': userid}})
-                                if res1.modified_count + res2.modified_count + res3.modified_count + res4.modified_count == 4:
+                                if res3.modified_count + res4.modified_count == 2:
                                     print('\n*** Successfully added to the blacklist ***')
 
                                 else:
