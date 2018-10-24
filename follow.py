@@ -254,7 +254,7 @@ Please select the options below.
                         my_info = db.users.find_one({'id':userid})
                         if_following = int(blck_id in my_info['following'])
                         if_follower = int(blck_id in my_info['follower'])
-                        print(if_following, if_follower)
+                        #print(if_following, if_follower)
                         if check.modified_count == 1:
                             if if_following:
                                 print('a')
