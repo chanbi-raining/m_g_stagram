@@ -77,7 +77,7 @@ def getNewsfeed(db,user):
             
         a = 1
         while a:
-
+            print()
             if page <= total_pages:
                 print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content'.ljust(10))
                 if page == total_pages:
@@ -107,7 +107,8 @@ def getNewsfeed(db,user):
                               str(current['comment']).ljust(10))
                 
 
-                    comment = input('\nSelect Menu \n 1. Commenting on this post \n 2. Delete your comments \n 3. Exit\n ')
+                    print('\nSelect Menu \n 1. Commenting on this post \n 2. Delete your comments \n 3. Exit\n')
+                    comment = input('Enter: ')
                     if comment == '1':
                         commentFunc(db, user, data[comm-1], 1)
                         data = list(db.posts.find({'posting_id':{'$in':following_list}}).sort('date', -1))
