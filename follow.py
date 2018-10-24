@@ -210,7 +210,7 @@ def unfollowNew(db, userid):
             except IndexError:
                 print('[ERROR] Unavailable number')
 
-            except:
+            except Exception as e:
                 print('[ERROR]')
         elif menu == '2':
             blackList(db, userid)
