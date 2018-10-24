@@ -227,10 +227,10 @@ def blackList(db, userid):
             opt = int(input(''))            
             if opt == 1:
                 print('''
-                        Please select the options below.
-                        1. Search by ID
-                        2. Search by name
-                        3. Back
+Please select the options below.
+1. Search by ID
+2. Search by name
+3. Back
                       ''')
                 want = int(input(''))
                 if want == 1:
