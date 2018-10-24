@@ -39,7 +39,8 @@ def signup(db):
                 profile = input('PROFILE: ')
                 
                 #Make the user document & Insert the document into users collection.
-                ins_res = db.users.insert_one({'id':id_, 'password':password, 'name':name, 'profile':profile, 'following':[], 'follower':[]})
+                ins_res = db.users.insert_one({'id':id_, 'password':password, 'name':name, 'profile':profile, 'following':[], 'follower':[],
+                                              'blacklist':[]})
                 if ins_res.inserted_id:
                     
                     print('Sign up complete! Please sign in to use Monogostagram.')
@@ -81,7 +82,7 @@ def mystatus(db, user):
     '''
     print()
     print('='*50)
-    print('\t\tMy status')
+    print('My status')
     print('='*50+'\n\n')
     result = list(db.users.find({'id': user}, {'profile':1, 'following':1, '_id':0, 'follower':1}))[0]
     profile = result['profile']
@@ -97,8 +98,7 @@ def userpage(db, user):
     '''
     user page
     '''
-    print('\n:::::   User Page   :::::')
-
+    
     print()
     print('1. My status')
     print('2. Newsfeed')
