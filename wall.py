@@ -103,7 +103,7 @@ def getNewsfeed(db,user):
                     comments = data[comm-1]['comments']
                     for i in range(len(comments)):
                         current = comments[i]
-                        print(str(current['id']).ljust(10), str(current['date'])[:-7].ljust(25),str(current['name']).ljust(10),
+                        print(str(i+1).ljust(10), str(current['date'])[:-7].ljust(25),str(current['name']).ljust(10),
                               str(current['comment']).ljust(10))
                 
 
