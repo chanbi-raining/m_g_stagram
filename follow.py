@@ -185,7 +185,7 @@ def unfollowNew(db, userid):
             print('Num'.ljust(10), 'ID'.ljust(15), 'Name'.ljust(15), 'Profile')        
             for k, i in enumerate(following):
                 person = db.users.find_one({'id': i}, {'_id':0})
-                print(str(k).ljust(10), i.ljust(15), person['name'].ljust(15), person['profile'])
+                print(str(k).ljust(10), i[:15].ljust(15), person['name'][:15].ljust(15), person['profile'])
             print()
             message = 'Type the user number that you want to unfollow. Type q to go back to the user page. '
             idxx = input(message)
