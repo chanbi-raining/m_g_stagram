@@ -283,7 +283,7 @@ Please select the options below.
                                         if cont != '1':
                                             break
                                             
-                            elif if_follwer:
+                            elif if_follower:
                                 print('d')
                                 res3 = db.users.update_one({'id': userid}, {'$pull': {'follower': blck_id}})
                                 res4 = db.users.update_one({'id': blck_id}, {'$pull': {'following': userid}})
