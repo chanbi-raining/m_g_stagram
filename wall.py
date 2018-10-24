@@ -139,7 +139,7 @@ def commentFunc(db, user, posting, new = 1):
     try:
         if new == 1:
             name = db.users.find_one({'id':user}, {'name':1, '_id':0})['name']
-            new_comment = input('\nComment :')
+            new_comment = input('\nComment : ')
             b = db.posts.update({'_id':posting['_id']},
                                 {'$push':{'comments':{'id': user, 'name':name, 'comment': new_comment, 'date': datetime.datetime.utcnow()}}})
             if b['nModified'] == 1:
