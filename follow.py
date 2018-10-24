@@ -186,7 +186,8 @@ def unfollowNew(db, userid):
             for k, i in enumerate(following):
                 person = db.users.find_one({'id': i}, {'_id':0})
                 print(str(k).ljust(10), i.ljust(15), person['name'].ljust(15), person['profile'])
-            idxx = input('\nType the user number that you want to unfollow. Type q to go back to the user page. ')
+            message = '\nType the user number that you want to unfollow. Type q to go back to the user page. '
+            idxx = input(message)
             if idxx == 'q': break
             try:
                 foll_id = following[int(idxx)]
@@ -247,8 +248,8 @@ Please select the options below.
                     break
 
                 else:
-                    print('Do you really want to put', blck_id,'on your blacklist? [Y/N]')
-                    before = input('')
+                    message = 'Do you really want to put', blck_id,'on your blacklist? [Y/N] '
+                    before = input(message)
                     if before in ['Y', 'y', 'yes','YES','Yes']:
                         check = db.users.update_one({'id':userid}, {'$push':{'blacklist':blck_id}})
                         my_info = db.users.find_one({'id':userid})
