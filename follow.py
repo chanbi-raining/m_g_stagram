@@ -90,7 +90,6 @@ def searchName(db, userid, follow = 1):
     while cont == '1':
         foll_name = input('Search Name: ')
         search = list(db.users.find({'$text': {'$search': foll_name}}))
-        print(search)
         total_pages = len(search)//10 if len(search) % 10 ==0 else len(search)//10 + 1
         
         if not search:
