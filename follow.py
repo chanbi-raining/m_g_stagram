@@ -219,10 +219,10 @@ def blackList(db, userid):
     try:
         while True:
             print('''
-                Please select the options below.
-                1. Put on a blacklist
-                2. Remove from a blacklist
-                3. Back
+Please select the options below.
+1. Put on a blacklist
+2. Remove from a blacklist
+3. Back
                   ''')
             opt = int(input(''))            
             if opt == 1:
