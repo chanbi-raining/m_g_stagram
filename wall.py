@@ -22,23 +22,20 @@ def getPosts(db,userid, delete = 0):
             if page <= total_pages:
                 print()
                 print('Num'.ljust(10), 'Date'.ljust(25), 'Content'.ljust(10))
-                #print('{:>10} {:>10} {:>10}'.format('num','Date', 'Content'))
                 if page == total_pages:
                     end = len(data)-1
                     for order in range((page-1)*5, len(data)):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['text']).ljust(10))
-                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                 else:
                     end = page*5-1
                     for order in range((page-1)*5, page*5):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['text']).ljust(10))
-                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                         
                 print('\n',page,'/', total_pages)
                 
                 if delete == 0:
                     #1-based indexing
-                    comm = eval(input('\nIf you want to see comments, please enter a number: (if you dont want, enter any other number)'))
+                    comm = eval(input('\nIf you want to see comments, please enter the post number. Enter 0 to go back: '))
                     if (page-1)*5 <= comm - 1 <= end:
                         print('\n[comments]\n')
                         print('{:>10} {:>10} {:>10}'.format('name', 'comment', 'date'))
@@ -83,25 +80,23 @@ def getNewsfeed(db,user):
 
             if page <= total_pages:
                 print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content'.ljust(10))
-                #print('{:>10} {:>10} {:>10}'.format('num','Date', 'Content'))
                 if page == total_pages:
                     end = len(data)-1
                     for order in range((page-1)*5, len(data)):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25),str(data[order]['posting_name']).ljust(10),
                               str(data[order]['text']).ljust(10))
-                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                 else:
                     end = page*5-1
                     for order in range((page-1)*5, page*5):
                         print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['posting_name']).ljust(10),
                               str(data[order]['text']).ljust(10))
-                        #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
+                        
                         
                 print('\n',page,'/', total_pages)
                 
 
                 #1-based indexing
-                comm = eval(input('\nIf you want to see comments, please enter the post number: (if you dont want, enter any other number)'))
+                comm = eval(input('\nIf you want to see comments, please enter the post number. Enter 0 to go back: '))
                 if (page-1)*5 <= comm - 1 <= end:
                     print('\n[comments]\n')
                     print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content'.ljust(10))
@@ -189,19 +184,17 @@ def Hashtags(db, user):
                         for order in range((page-1)*5, len(data)):
                             print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25),str(data[order]['posting_name']).ljust(10),
                                   str(data[order]['text']).ljust(10))
-                            #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
                     else:
                         end = page*5-1
                         for order in range((page-1)*5, page*5):
                             print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['posting_name']).ljust(10),
                                   str(data[order]['text']).ljust(10))
-                            #print('{:>10} {:>10} {:>10}'.format(order+1, data[order]['date'], data[order]['text']))
 
                     print('\n',page,'/', total_pages)
 
 
                     #1-based indexing
-                    comm = eval(input('\nIf you want to see comments, please enter the post number: (if you dont want, enter any other number)'))
+                    comm = eval(input('\nIf you want to see comments, please enter the post number. Enter 0 to go back: '))
                     if (page-1)*5 <= comm - 1 <= end:
                         print('\n[comments]\n')
                         print('{:>10} {:>10} {:>10}'.format('name', 'comment', 'date'))
