@@ -79,17 +79,17 @@ def getNewsfeed(db,user):
         while a:
             print()
             if page <= total_pages:
-                print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content'.ljust(10))
+                print('Num'.ljust(10), 'Date'.ljust(25), 'Name'.ljust(10), 'Content')
                 if page == total_pages:
                     end = len(data)-1
                     for order in range((page-1)*5, len(data)):
-                        print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25),str(data[order]['posting_name']).ljust(10),
-                              str(data[order]['text']).ljust(10))
+                        print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25),str(data[order]['posting_name'][:10]).ljust(10),
+                              str(data[order]['text'][:20]))
                 else:
                     end = page*5-1
                     for order in range((page-1)*5, page*5):
-                        print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['posting_name']).ljust(10),
-                              str(data[order]['text']).ljust(10))
+                        print(str(order+1).ljust(10), str(data[order]['date'])[:-7].ljust(25), str(data[order]['posting_name'][:10]).ljust(10),
+                              str(data[order]['text'][:20]))
                         
                         
                 print('\n',page,'/', total_pages)
@@ -103,8 +103,8 @@ def getNewsfeed(db,user):
                     comments = data[comm-1]['comments']
                     for i in range(len(comments)):
                         current = comments[i]
-                        print(str(i+1).ljust(10), str(current['date'])[:-7].ljust(25),str(current['name']).ljust(10),
-                              str(current['comment']).ljust(10))
+                        print(str(i+1).ljust(10), str(current['date'])[:-7].ljust(25),str(current['name'][:10]).ljust(10),
+                              str(current['comment']))
                 
 
                     print('\nSelect Menu \n 1. Commenting on this post \n 2. Delete your comments \n 3. Exit\n')
