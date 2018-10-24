@@ -188,12 +188,14 @@ def unfollowNew(db, userid):
                 print(str(k).ljust(10), i.ljust(15), person['name'].ljust(15), person['profile'])
             print()
             message = 'Type the user number that you want to unfollow. Type q to go back to the user page. '
-            idxx = input(message)
+            print(message)
+            idxx = input()
             if idxx == 'q': break
             try:
                 foll_id = following[int(idxx)]
                 message = 'Do you wish to unfollow '+str(foll_id)+'? [1/0] '
-                areyousure = input(message)
+                print(message)
+                areyousure = input()
                 if areyousure != '1':
                     continue
                 res1 = db.users.update_one({'id': userid}, {'$pull': {'following': foll_id}})
